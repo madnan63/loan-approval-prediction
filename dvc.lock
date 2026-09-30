@@ -25,13 +25,13 @@ stages:
       md5: a79a5c5e4eea90cd3c6df29b96298fda
       size: 2910196
   train:
-    cmd: python .\src\train.py
+    cmd: python src\train.py
     deps:
-    - path: .\data\processed\train.csv
+    - path: data\processed\train.csv
       hash: md5
       md5: a79a5c5e4eea90cd3c6df29b96298fda
       size: 2910196
-    - path: .\src\train.py
+    - path: src\train.py
       hash: md5
       md5: 6d96c6e019ca96191ed41d4492cc4709
       size: 2179
@@ -48,63 +48,63 @@ stages:
         random_forest.n_estimators: 100
         random_forest.random_state: 42
     outs:
-    - path: .\data\processed\validation.csv
+    - path: data\processed\validation.csv
       hash: md5
       md5: 2d4876003b6b4fd5cccec2ed86fdf144
       size: 582392
-    - path: .\models\decision_tree.pkl
+    - path: models\decision_tree.pkl
       hash: md5
       md5: 7d2ce6ca116240c4161a9e73929454d5
       size: 991378
-    - path: .\models\extra_trees.pkl
+    - path: models\extra_trees.pkl
       hash: md5
       md5: 00c45bcc503fbcc94ffab419aa0febdb
       size: 260735175
-    - path: .\models\gradient_boosting.pkl
+    - path: models\gradient_boosting.pkl
       hash: md5
       md5: 891ee28be1eb67fda5baf8430392b283
       size: 137777
-    - path: .\models\logistic_regression.pkl
+    - path: models\logistic_regression.pkl
       hash: md5
       md5: 04df9cf51aa406ef0d73462161f74184
       size: 1219
-    - path: .\models\random_forest.pkl
+    - path: models\random_forest.pkl
       hash: md5
       md5: 71b86beac10b333c17008cfb0393980c
       size: 94504939
   evaluate:
-    cmd: python .\src\evaluate.py
+    cmd: python src\evaluate.py
     deps:
-    - path: .\data\processed\validation.csv
+    - path: data\processed\validation.csv
       hash: md5
       md5: 2d4876003b6b4fd5cccec2ed86fdf144
       size: 582392
-    - path: .\models\decision_tree.pkl
+    - path: models\decision_tree.pkl
       hash: md5
       md5: 7d2ce6ca116240c4161a9e73929454d5
       size: 991378
-    - path: .\models\extra_trees.pkl
+    - path: models\extra_trees.pkl
       hash: md5
       md5: 00c45bcc503fbcc94ffab419aa0febdb
       size: 260735175
-    - path: .\models\gradient_boosting.pkl
+    - path: models\gradient_boosting.pkl
       hash: md5
       md5: 891ee28be1eb67fda5baf8430392b283
       size: 137777
-    - path: .\models\logistic_regression.pkl
+    - path: models\logistic_regression.pkl
       hash: md5
       md5: 04df9cf51aa406ef0d73462161f74184
       size: 1219
-    - path: .\models\random_forest.pkl
+    - path: models\random_forest.pkl
       hash: md5
       md5: 71b86beac10b333c17008cfb0393980c
       size: 94504939
-    - path: .\src\evaluate.py
+    - path: src\evaluate.py
       hash: md5
       md5: 6d2a1ede3057e92d9605ad4334a10bf2
       size: 1594
     outs:
-    - path: .\metrics\metrics.json
+    - path: metrics\metrics.json
       hash: md5
       md5: 9f738da797e4c7f92e3e3341e53cf090
       size: 935

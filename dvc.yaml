@@ -9,17 +9,17 @@ stages:
     - data\processed\test.csv
     - data\processed\train.csv
   train:
-    cmd: python .\src\train.py
+    cmd: python src\train.py
     deps:
-    - .\data\processed\train.csv
-    - .\src\train.py
+    - data\processed\train.csv
+    - src\train.py
     outs:
-    - .\data\processed\validation.csv
-    - .\models\decision_tree.pkl
-    - .\models\extra_trees.pkl
-    - .\models\gradient_boosting.pkl
-    - .\models\logistic_regression.pkl
-    - .\models\random_forest.pkl
+    - data\processed\validation.csv
+    - models\decision_tree.pkl
+    - models\extra_trees.pkl
+    - models\gradient_boosting.pkl
+    - models\logistic_regression.pkl
+    - models\random_forest.pkl
     params:
     - data.random_state
     - data.test_size
@@ -32,15 +32,16 @@ stages:
     - random_forest.n_estimators
     - random_forest.random_state
   evaluate:
-    cmd: python .\src\evaluate.py
+    cmd: python src\evaluate.py
     deps:
-    - .\data\processed\validation.csv
-    - .\models\decision_tree.pkl
-    - .\models\extra_trees.pkl
-    - .\models\gradient_boosting.pkl
-    - .\models\logistic_regression.pkl
-    - .\models\random_forest.pkl
-    - .\src\evaluate.py
+    - data\processed\validation.csv
+    - models\decision_tree.pkl
+    - models\extra_trees.pkl
+    - models\gradient_boosting.pkl
+    - models\logistic_regression.pkl
+    - models\random_forest.pkl
+    - src\evaluate.py
     metrics:
-    - .\metrics\metrics.json:
+    - metrics\metrics.json:
         cache: false
+

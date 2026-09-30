@@ -24,3 +24,43 @@ stages:
       hash: md5
       md5: a79a5c5e4eea90cd3c6df29b96298fda
       size: 2910196
+  train:
+    cmd: python .\src\train.py
+    deps:
+    - path: .\data\processed\train.csv
+      hash: md5
+      md5: a79a5c5e4eea90cd3c6df29b96298fda
+      size: 2910196
+    - path: .\src\train.py
+      hash: md5
+      md5: ce5b0800d25790b4d51a179cc5ea39d5
+      size: 1183
+    outs:
+    - path: .\data\processed\validation.csv
+      hash: md5
+      md5: 2d4876003b6b4fd5cccec2ed86fdf144
+      size: 582392
+    - path: .\models\model.pkl
+      hash: md5
+      md5: 71b86beac10b333c17008cfb0393980c
+      size: 94504939
+  evaluate:
+    cmd: python .\src\evaluate.py
+    deps:
+    - path: .\data\processed\validation.csv
+      hash: md5
+      md5: 2d4876003b6b4fd5cccec2ed86fdf144
+      size: 582392
+    - path: .\models\model.pkl
+      hash: md5
+      md5: 71b86beac10b333c17008cfb0393980c
+      size: 94504939
+    - path: .\src\evaluate.py
+      hash: md5
+      md5: f4788a74bff4dd7fbe345c4b4e73702d
+      size: 912
+    outs:
+    - path: .\metrics\metrics.json
+      hash: md5
+      md5: c49304b1c3f7a1f4d319aa969b3f120a
+      size: 140

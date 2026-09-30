@@ -1,0 +1,4 @@
+[core]
+    remote = storage
+['remote "storage"']
+    url = C:\Users\shaad\dvc-storage\loan-approval-prediction

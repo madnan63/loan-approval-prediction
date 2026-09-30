@@ -33,8 +33,20 @@ stages:
       size: 2910196
     - path: .\src\train.py
       hash: md5
-      md5: 6739f4d17a57bc02dec1dcca07426fbd
-      size: 1750
+      md5: 6d96c6e019ca96191ed41d4492cc4709
+      size: 2179
+    params:
+      params.yaml:
+        data.random_state: 42
+        data.test_size: 0.2
+        decision_tree.random_state: 42
+        extra_trees.n_estimators: 100
+        extra_trees.random_state: 42
+        gradient_boosting.random_state: 42
+        logistic_regression.max_iter: 1000
+        logistic_regression.random_state: 42
+        random_forest.n_estimators: 100
+        random_forest.random_state: 42
     outs:
     - path: .\data\processed\validation.csv
       hash: md5

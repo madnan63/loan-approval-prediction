@@ -1,5 +1,6 @@
 import os
 import pickle
+import yaml
 import pandas as pd
 
 from sklearn.model_selection import train_test_split
@@ -12,6 +13,11 @@ from sklearn.ensemble import (
 )
 
 
+# Load parameters
+with open("params.yaml", "r") as f:
+    params = yaml.safe_load(f)
+
+
 # Load processed training data
 df = pd.read_csv("data/processed/train.csv")
 
@@ -21,12 +27,12 @@ X = df.drop(columns=["loan_status"])
 y = df["loan_status"]
 
 
-# Split into training and validation sets
+# Train-validation split
 X_train, X_val, y_train, y_val = train_test_split(
     X,
     y,
-    test_size=0.2,
-    random_state=42,
+    test_size=params["data"]["test_size"],
+    random_state=params["data"]["random_state"],
     stratify=y
 )
 
@@ -34,26 +40,26 @@ X_train, X_val, y_train, y_val = train_test_split(
 # Models
 models = {
     "logistic_regression": LogisticRegression(
-        max_iter=1000,
-        random_state=42
+        max_iter=params["logistic_regression"]["max_iter"],
+        random_state=params["logistic_regression"]["random_state"]
     ),
 
     "decision_tree": DecisionTreeClassifier(
-        random_state=42
+        random_state=params["decision_tree"]["random_state"]
     ),
 
     "random_forest": RandomForestClassifier(
-        n_estimators=100,
-        random_state=42
+        n_estimators=params["random_forest"]["n_estimators"],
+        random_state=params["random_forest"]["random_state"]
     ),
 
     "extra_trees": ExtraTreesClassifier(
-        n_estimators=100,
-        random_state=42
+        n_estimators=params["extra_trees"]["n_estimators"],
+        random_state=params["extra_trees"]["random_state"]
     ),
 
     "gradient_boosting": GradientBoostingClassifier(
-        random_state=42
+        random_state=params["gradient_boosting"]["random_state"]
     )
 }
 
@@ -62,7 +68,7 @@ models = {
 os.makedirs("models", exist_ok=True)
 
 
-# Train and save every model
+# Train and save models
 for name, model in models.items():
 
     print(f"Training {name}...")

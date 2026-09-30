@@ -20,6 +20,17 @@ stages:
     - .\models\gradient_boosting.pkl
     - .\models\logistic_regression.pkl
     - .\models\random_forest.pkl
+    params:
+    - data.random_state
+    - data.test_size
+    - decision_tree.random_state
+    - extra_trees.n_estimators
+    - extra_trees.random_state
+    - gradient_boosting.random_state
+    - logistic_regression.max_iter
+    - logistic_regression.random_state
+    - random_forest.n_estimators
+    - random_forest.random_state
   evaluate:
     cmd: python .\src\evaluate.py
     deps:

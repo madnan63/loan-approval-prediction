@@ -33,14 +33,30 @@ stages:
       size: 2910196
     - path: .\src\train.py
       hash: md5
-      md5: ce5b0800d25790b4d51a179cc5ea39d5
-      size: 1183
+      md5: 6739f4d17a57bc02dec1dcca07426fbd
+      size: 1750
     outs:
     - path: .\data\processed\validation.csv
       hash: md5
       md5: 2d4876003b6b4fd5cccec2ed86fdf144
       size: 582392
-    - path: .\models\model.pkl
+    - path: .\models\decision_tree.pkl
+      hash: md5
+      md5: 7d2ce6ca116240c4161a9e73929454d5
+      size: 991378
+    - path: .\models\extra_trees.pkl
+      hash: md5
+      md5: 00c45bcc503fbcc94ffab419aa0febdb
+      size: 260735175
+    - path: .\models\gradient_boosting.pkl
+      hash: md5
+      md5: 891ee28be1eb67fda5baf8430392b283
+      size: 137777
+    - path: .\models\logistic_regression.pkl
+      hash: md5
+      md5: 04df9cf51aa406ef0d73462161f74184
+      size: 1219
+    - path: .\models\random_forest.pkl
       hash: md5
       md5: 71b86beac10b333c17008cfb0393980c
       size: 94504939
@@ -51,16 +67,32 @@ stages:
       hash: md5
       md5: 2d4876003b6b4fd5cccec2ed86fdf144
       size: 582392
-    - path: .\models\model.pkl
+    - path: .\models\decision_tree.pkl
+      hash: md5
+      md5: 7d2ce6ca116240c4161a9e73929454d5
+      size: 991378
+    - path: .\models\extra_trees.pkl
+      hash: md5
+      md5: 00c45bcc503fbcc94ffab419aa0febdb
+      size: 260735175
+    - path: .\models\gradient_boosting.pkl
+      hash: md5
+      md5: 891ee28be1eb67fda5baf8430392b283
+      size: 137777
+    - path: .\models\logistic_regression.pkl
+      hash: md5
+      md5: 04df9cf51aa406ef0d73462161f74184
+      size: 1219
+    - path: .\models\random_forest.pkl
       hash: md5
       md5: 71b86beac10b333c17008cfb0393980c
       size: 94504939
     - path: .\src\evaluate.py
       hash: md5
-      md5: f4788a74bff4dd7fbe345c4b4e73702d
-      size: 912
+      md5: 6d2a1ede3057e92d9605ad4334a10bf2
+      size: 1594
     outs:
     - path: .\metrics\metrics.json
       hash: md5
-      md5: c49304b1c3f7a1f4d319aa969b3f120a
-      size: 140
+      md5: 9f738da797e4c7f92e3e3341e53cf090
+      size: 935

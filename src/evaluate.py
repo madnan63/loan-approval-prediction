@@ -1,9 +1,13 @@
 import json
-import os
 import pickle
 import pandas as pd
 
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+from sklearn.metrics import (
+    accuracy_score,
+    precision_score,
+    recall_score,
+    f1_score
+)
 
 
 # Load validation data
@@ -13,34 +17,61 @@ X_val = df.drop(columns=["loan_status"])
 y_val = df["loan_status"]
 
 
-# Load trained model
-with open("models/model.pkl", "rb") as f:
-    model = pickle.load(f)
-
-
-# Make predictions
-y_pred = model.predict(X_val)
-
-
-# Calculate metrics
-metrics = {
-    "accuracy": accuracy_score(y_val, y_pred),
-    "precision": precision_score(y_val, y_pred),
-    "recall": recall_score(y_val, y_pred),
-    "f1_score": f1_score(y_val, y_pred)
+# Model files
+model_files = {
+    "logistic_regression": "models/logistic_regression.pkl",
+    "decision_tree": "models/decision_tree.pkl",
+    "random_forest": "models/random_forest.pkl",
+    "extra_trees": "models/extra_trees.pkl",
+    "gradient_boosting": "models/gradient_boosting.pkl"
 }
 
 
-# Create metrics directory
-os.makedirs("metrics", exist_ok=True)
+results = {}
 
 
-# Save metrics
+# Evaluate every model
+for name, path in model_files.items():
+
+    with open(path, "rb") as f:
+        model = pickle.load(f)
+
+    y_pred = model.predict(X_val)
+
+    metrics = {
+        "accuracy": float(accuracy_score(y_val, y_pred)),
+        "precision": float(precision_score(y_val, y_pred)),
+        "recall": float(recall_score(y_val, y_pred)),
+        "f1_score": float(f1_score(y_val, y_pred))
+    }
+
+    results[name] = metrics
+
+
+# Save all metrics
 with open("metrics/metrics.json", "w") as f:
-    json.dump(metrics, f, indent=4)
+    json.dump(results, f, indent=4)
 
 
-print("Evaluation completed!")
+# Display results
+print("Model Evaluation Results")
+print("-" * 78)
 
-for name, value in metrics.items():
-    print(f"{name}: {value:.4f}")
+print(
+    f"{'Model':<22}"
+    f"{'Accuracy':>12}"
+    f"{'Precision':>12}"
+    f"{'Recall':>12}"
+    f"{'F1 Score':>12}"
+)
+
+print("-" * 78)
+
+for name, metrics in results.items():
+    print(
+        f"{name:<22}"
+        f"{metrics['accuracy']:>12.4f}"
+        f"{metrics['precision']:>12.4f}"
+        f"{metrics['recall']:>12.4f}"
+        f"{metrics['f1_score']:>12.4f}"
+    )

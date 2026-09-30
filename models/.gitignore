@@ -1,1 +1,6 @@
 /model.pkl
+/logistic_regression.pkl
+/decision_tree.pkl
+/random_forest.pkl
+/extra_trees.pkl
+/gradient_boosting.pkl

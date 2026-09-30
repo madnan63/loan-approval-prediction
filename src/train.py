@@ -2,8 +2,14 @@ import os
 import pickle
 import pandas as pd
 
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import (
+    RandomForestClassifier,
+    ExtraTreesClassifier,
+    GradientBoostingClassifier
+)
 
 
 # Load processed training data
@@ -25,26 +31,49 @@ X_train, X_val, y_train, y_val = train_test_split(
 )
 
 
-# Train model
-model = RandomForestClassifier(
-    n_estimators=100,
-    random_state=42
-)
+# Models
+models = {
+    "logistic_regression": LogisticRegression(
+        max_iter=1000,
+        random_state=42
+    ),
 
-model.fit(X_train, y_train)
+    "decision_tree": DecisionTreeClassifier(
+        random_state=42
+    ),
+
+    "random_forest": RandomForestClassifier(
+        n_estimators=100,
+        random_state=42
+    ),
+
+    "extra_trees": ExtraTreesClassifier(
+        n_estimators=100,
+        random_state=42
+    ),
+
+    "gradient_boosting": GradientBoostingClassifier(
+        random_state=42
+    )
+}
 
 
-# Create output folders if needed
+# Create output folder
 os.makedirs("models", exist_ok=True)
-os.makedirs("data/processed", exist_ok=True)
 
 
-# Save trained model
-with open("models/model.pkl", "wb") as f:
-    pickle.dump(model, f)
+# Train and save every model
+for name, model in models.items():
+
+    print(f"Training {name}...")
+
+    model.fit(X_train, y_train)
+
+    with open(f"models/{name}.pkl", "wb") as f:
+        pickle.dump(model, f)
 
 
-# Save validation data for evaluation stage
+# Save validation data
 validation_df = X_val.copy()
 validation_df["loan_status"] = y_val.values
 
@@ -54,6 +83,8 @@ validation_df.to_csv(
 )
 
 
+print()
 print("Training completed!")
 print("Training samples:", len(X_train))
 print("Validation samples:", len(X_val))
+print("Models trained:", len(models))
